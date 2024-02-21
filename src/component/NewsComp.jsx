@@ -6,12 +6,18 @@ const NewsComp = ({ category }) => {
     const [apiData, setApiData] = useState();
 
     const fetchData = async () => {
+      try {
+
         await axios.get(
             category ? `https://newsapi.org/v2/top-headlines?country=in&category=${category}&apiKey=98ba8c44a2274002acb1162387e4c7c6`
                 : 'https://newsapi.org/v2/top-headlines?country=in&apiKey=98ba8c44a2274002acb1162387e4c7c6').then((res) => {
                     setApiData(res.data.articles);
                     // console.log(res.data.articles);
                 });
+        
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     useEffect(() => {
